@@ -1,7 +1,7 @@
-import {addCard, deleteCard, likeCard} from './components/card.js';
-import {popupIsOpen, popupIsClose, popupReset, pressEsc, overlayClick} from './components/modal.js';
-import './pages/index.css';
 import initialCards from './components/cards.js';
+import './pages/index.css';
+import {addCard, deleteCard, likeCard} from './components/card.js';
+import {popupIsOpen, popupIsClose, popupReset, overlayClick} from './components/modal.js';
 
 const content = document.querySelector('.content');
 const placesList = content.querySelector('.places__list');
@@ -14,16 +14,16 @@ const formProfileEdit = document.querySelector('.popup_type_edit');
 const submitFormProfile = formProfileEdit.querySelector('.popup__button');
 const closeFormProfile = formProfileEdit.querySelector('.popup__close');
 const formImage = document.querySelector('.popup_type_image');
+const closeFormImage = formImage.querySelector('.popup__close');
+const cardTemplate = document.querySelector('#card-template').content;
 const formImageSrc = formImage.querySelector('.popup__image');
 const formImageCpt = formImage.querySelector('.popup__caption');
-const closeformImage = formImage.querySelector('.popup__close');
-const cardTemplate = document.querySelector('#card-template').content;
 
 initialCards.forEach((card) => {
   placesList.append(addCard(card.name, card.link, deleteCard, likeCard));
 });
 
-formImage.addEventListener('click', function () {
+formImage.addEventListener('click', function (evt) {
   overlayClick(evt);
 });
 
@@ -33,10 +33,10 @@ buttonNewPlace.addEventListener('click', function () {
 
 closeFormNewCard.addEventListener('click', function () {
   popupIsClose(formNewCard);
-  popupReset()
+  popupReset();
 });
 
-formNewCard.addEventListener('click', function () {
+formNewCard.addEventListener('click', function (evt) {
   overlayClick(evt);
 });
 
@@ -45,9 +45,9 @@ submitFormNewCard.addEventListener('click', function (evt) {
   const form = document.forms['new-place'];
   const name = form.elements['place-name'].value;
   const link = form.elements.link.value;
-  placesList.prepend(addCard(name, link, deleteCard));
+  placesList.prepend(addCard(name, link, deleteCard, likeCard));
   popupIsClose(formNewCard);
-  popupReset()
+  popupReset();
 });
 
 buttonProfileEdit.addEventListener('click', function () {
@@ -61,10 +61,10 @@ buttonProfileEdit.addEventListener('click', function () {
 
 closeFormProfile.addEventListener('click', function () {
   popupIsClose(formProfileEdit);
-  popupReset()
+  popupReset();
 });
 
-formProfileEdit.addEventListener('click', function () {
+formProfileEdit.addEventListener('click', function (evt) {
   overlayClick(evt);
 });
 
@@ -76,11 +76,12 @@ submitFormProfile.addEventListener('click', function (evt) {
   document.querySelector('.profile__title').textContent = name.value;
   document.querySelector('.profile__description').textContent = description.value;
   popupIsClose(formProfileEdit);
-  popupReset()
+  popupReset();
 });
 
-closeformImage.addEventListener('click', function () {
+closeFormImage.addEventListener('click', function () {
   popupIsClose(formImage);
-  popupReset()
+  popupReset();
 });
 
+export {formNewCard, formProfileEdit, formImage, formImageSrc, formImageCpt, cardTemplate};

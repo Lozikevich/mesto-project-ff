@@ -1,3 +1,5 @@
+import {formNewCard, formProfileEdit, formImage} from '../index.js';
+
 function popupIsOpen(element) {
     element.classList.add('popup_is-opened');
     document.addEventListener('keydown', pressEsc);
@@ -19,10 +21,10 @@ function pressEsc(evt) {
             popupIsClose(formImage);
         } else if (formProfileEdit.classList.contains('popup_is-opened')) {
             popupIsClose(formProfileEdit);
-            popupReset()
+            popupReset();
         } else if (formNewCard.classList.contains('popup_is-opened')) {
             popupIsClose(formNewCard);
-            popupReset()
+            popupReset();
         };
     };
 };
@@ -33,13 +35,12 @@ function overlayClick(evt) {
             popupIsClose(formImage);
         } else if (formProfileEdit.classList.contains('popup_is-opened')) {
             popupIsClose(formProfileEdit);
-            popupReset()
+            popupReset();
         } else if (formNewCard.classList.contains('popup_is-opened')) {
             popupIsClose(formNewCard);
-            popupReset()
+            popupReset();
         };
     };
 };
 
 export {popupIsOpen, popupIsClose, popupReset, pressEsc, overlayClick};
-
