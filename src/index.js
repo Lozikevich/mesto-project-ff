@@ -1,6 +1,6 @@
 import initialCards from './components/cards.js';
 import './pages/index.css';
-import {addCard, deleteCard, likeCard, cardTemplate} from './components/card.js';
+import {addCard, deleteCard, likeCard, cardTemplate, handleCardClick} from './components/card.js';
 import {openPopup, closePopup} from './components/modal.js';
 
 const content = document.querySelector('.content');
@@ -9,7 +9,7 @@ const buttonNewPlace = document.querySelector('.profile__add-button');
 const buttonProfileEdit = document.querySelector('.profile__edit-button');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupProfileEdit = document.querySelector('.popup_type_edit');
-const newCard = {placeName: 'Name', placeImg: 'Link', deleteCard, likeCard};
+const cardParams = {placeName: 'Name', placeImg: 'Link', deleteCard, likeCard, handleCardClick};
 const popups = document.querySelectorAll('.popup')
 const formEditProfile = document.forms['edit-profile'];
 const formNewCard = document.forms['new-place'];
@@ -30,9 +30,9 @@ popups.forEach((popup) => {
 });
 
 initialCards.forEach((card) => {
-  newCard.placeName = card.name;
-  newCard.placeImg = card.link;
-  placesList.append(addCard(newCard));
+  cardParams.placeName = card.name;
+  cardParams.placeImg = card.link;
+  placesList.append(addCard(cardParams));
 });
 
 buttonNewPlace.addEventListener('click', function () {
@@ -45,16 +45,16 @@ buttonProfileEdit.addEventListener('click', function () {
   descriptionProfile.value = profileDescription.textContent;
 });
 
-popupNewCard.addEventListener('submit', function (evt) {
+formNewCard.addEventListener('submit', function (evt) {
   evt.preventDefault();
-  newCard.placeName = formNewCard.elements['place-name'].value;
-  newCard.placeImg = formNewCard.elements.link.value;
-  placesList.prepend(addCard(newCard));
+  cardParams.placeName = formNewCard.elements['place-name'].value;
+  cardParams.placeImg = formNewCard.elements.link.value;
+  placesList.prepend(addCard(cardParams));
   formNewCard.reset();
   closePopup(popupNewCard);
 });
 
-popupProfileEdit.addEventListener('submit', function (evt) {
+formEditProfile.addEventListener('submit', function (evt) {
   evt.preventDefault();
   profileTitle.textContent = nameProfile.value;
   profileDescription.textContent = descriptionProfile.value;
