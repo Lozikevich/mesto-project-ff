@@ -4,6 +4,10 @@
 @import url('./__info/profile__info.css');
 @import url('./__title/profile__title.css');
 @import url('./__image/profile__image.css');
+@import url('./__pencil/pencil-icon.css');
+@import url('./__pencil/pencil-icon-visible.css');
+@import url('./__image/profile__overlay.css');
+@import url('./__image/profile__overlay-visible.css');
 
 .profile {
   font-family: 'Inter', Arial, sans-serif;

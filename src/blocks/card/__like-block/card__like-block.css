@@ -1,0 +1,9 @@
+.card__like-block {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    align-items: center;
+    background: #fff;
+    /*padding: 22px 20px;*/
+}
+  

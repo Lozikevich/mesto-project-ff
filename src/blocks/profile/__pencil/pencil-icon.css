@@ -1,0 +1,14 @@
+.pencil-icon {
+    width: 26px;
+    height: 26px;
+    background: transparent url('../../../images/pencil.svg') center no-repeat;
+    background-size: 26px 26px;
+    position: absolute;
+    top: 47px;
+    left: 47px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.6s, opacity 0.6s;
+    z-index: 2;
+}
+
