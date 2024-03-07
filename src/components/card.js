@@ -1,4 +1,5 @@
 import { openPopup } from './modal.js';
+import {likeCard, dislikeCard} from './api.js'
 const cardTemplate = document.querySelector('#card-template').content;
 const popupImage = document.querySelector('.popup_type_image');
 const popupImageSrc = popupImage.querySelector('.popup__image');
@@ -7,50 +8,6 @@ const popupDelete = document.querySelector('.popup_type_delete');
 let cardIdForDelete;
 let cardForRemove;
 
-function deleteCard(cardID) {
-  fetch(`https://nomoreparties.co/v1/wff-cohort-7/cards/${cardID}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: '1bbb74a8-881d-4910-bd79-a60878628ef3',
-        'Content-Type': 'application/json'
-    },
-  })
-  .then(res => {
-    if(res.ok) {
-      cardForRemove.remove();
-    };
-  })
-};
-
-function likeCard(cardID, cardLikeButton, cardLikeCounter) {
-  fetch(`https://nomoreparties.co/v1/wff-cohort-7/cards/likes/${cardID}`, {
-    method: 'PUT',
-    headers: {
-      authorization: '1bbb74a8-881d-4910-bd79-a60878628ef3',
-        'Content-Type': 'application/json'
-    },
-  })
-  .then((data)=>data.json())
-  .then((data) => {
-    cardLikeCounter.textContent = data.likes.length;
-    cardLikeButton.classList.add('card__like-button_is-active');
-  })
-};
-
-function dislikeCard(cardID, cardLikeButton, cardLikeCounter) {
-  fetch(`https://nomoreparties.co/v1/wff-cohort-7/cards/likes/${cardID}`, {
-    method: 'DELETE',
-    headers: {
-      authorization: '1bbb74a8-881d-4910-bd79-a60878628ef3',
-        'Content-Type': 'application/json'
-    },
-  })
-  .then((data)=>data.json())
-  .then((data) => {
-    cardLikeCounter.textContent = data.likes.length;
-    cardLikeButton.classList.remove('card__like-button_is-active');
-  })
-};
 
 function handleCardClick(cardImage, cardTitle) {
   openPopup(popupImage);
@@ -77,7 +34,7 @@ function addCard({ placeImg, placeName, likeCounter, ownerId, likes, cardID, lik
 
   cardLikeButton.addEventListener('click', function() {
     if (cardLikeButton.classList.contains('card__like-button_is-active')) {
-       dislikeCard(cardID, cardLikeButton, cardLikeCounter);
+      dislikeCard(cardID, cardLikeButton, cardLikeCounter);
     }
     else {
       likeCard(cardID, cardLikeButton, cardLikeCounter);
@@ -102,4 +59,4 @@ function addCard({ placeImg, placeName, likeCounter, ownerId, likes, cardID, lik
   return cardElement;
 };
 
-export {addCard, deleteCard, likeCard, handleCardClick, popupDelete, cardIdForDelete};
+export {addCard, handleCardClick, popupDelete, cardIdForDelete, cardForRemove};

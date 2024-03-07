@@ -1,5 +1,0 @@
-.profile__overlay-visible {
-    visibility: visible;
-    opacity: 0.8;
-    transition: visibility 0s, opacity 0.6s;
-}

@@ -12,3 +12,8 @@
     z-index: 2;
 }
 
+.profile__image:hover .pencil-icon {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.6s;
+}

@@ -10,6 +10,7 @@
 @import url('./__content/__content-delete/popup__content-delete.css');
 @import url('./__button/popup__button-delete.css');
 @import url('./__form/popup__form-delete.css');
+@import url('./__content/__content-new-avatar/popup__content-new-avatar.css');
 
 .popup {
   font-family: 'Inter', Arial, sans-serif;

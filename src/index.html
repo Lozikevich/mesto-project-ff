@@ -103,6 +103,7 @@
       </form>
     </div>
   </div>
+
   <div class="popup popup_type_image popup_is-animated">
     <div class="popup__content popup__content_content_image">
       <button type="button" class="popup__close"></button>
@@ -120,6 +121,29 @@
       </form>
     </div>
   </div>
+
+<!---->
+<div class="popup popup_type_new-avatar popup_is-animated">
+  <div class="popup__content popup__content-new-avatar">
+    <button type="button" class="popup__close"></button>
+    <h3 class="popup__title">Обновить аватар</h3>
+    <form class="popup__form" name="new-avatar">
+      <input
+        id = "new-avatar"
+        type="url"
+        data-error-type = "Введите адрес сайта" 
+        name="link" 
+        class="popup__input popup__input_type_url" 
+        placeholder="Ссылка на картинку" 
+        required
+        data-error-required = "Вы пропустили это поле">
+      <span class="new-avatar-error form__input-error"></span>
+      <button type="submit" class="button popup__button">Сохранить</button>
+    </form>
+  </div>
+</div>
+
+
 </div>
 
 
