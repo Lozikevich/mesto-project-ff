@@ -1,18 +1,13 @@
 const isValid = (formElement, inputElement, restConfig) => {
-  if (!inputElement.validity.valid) {
-    if (inputElement.validity.valueMissing) {
-      showInputError(formElement, inputElement, inputElement.dataset.errorRequired, restConfig);
-    }
-    else if (inputElement.validity.typeMismatch) {
-      showInputError(formElement, inputElement, inputElement.dataset.errorType, restConfig);
-    }
-    else if (inputElement.validity.patternMismatch) {
-      showInputError(formElement, inputElement, inputElement.dataset.errorPattern, restConfig);
-    }
+  if (inputElement.validity.patternMismatch) {
+    showInputError(formElement, inputElement, inputElement.dataset.errorPattern, restConfig);
+  } else if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage, restConfig);
+  }
   else {
     hideInputError(formElement, inputElement, restConfig);
-  }
-}};
+  };
+};
 
 const showInputError = (formElement, inputElement, errorMessage, restConfig) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -75,6 +70,7 @@ const clearValidation = (form, validationConfig) => {
   inputList.forEach((inputElement) => {
     hideInputError(form, inputElement, restConfig);
   });
+  form.reset();
   toggleButtonState(inputList, buttonElement, restConfig);
 };
 
