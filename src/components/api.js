@@ -23,8 +23,8 @@ const createNewCard = (name, link) => {
   .then(handleResponse)
 };
 
-function deleteCard(cardID) {
-  return fetch(`${config.baseUrl}/cards/${cardID}`, {
+function deleteCard(cardId) {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,
   })
@@ -53,16 +53,16 @@ const updateProfile = (name, description) => {
   .then(handleResponse)
 };
 
-function likeCard(cardID) {
-  return fetch(`${config.baseUrl}/cards/likes/${cardID}`, {
+function likeCard(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: config.headers
   })
   .then(handleResponse)
 };
 
-function dislikeCard(cardID) {
-  return fetch(`${config.baseUrl}/cards/likes/${cardID}`, {
+function dislikeCard(cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: config.headers
   })
