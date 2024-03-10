@@ -1,9 +1,9 @@
 import './pages/index.css';
-import {createCard, popupDelete, cardIdForDelete, cardForRemove, handleResponse} from './components/card.js';
+import {createCard, popupDelete, cardIdForDelete, cardForRemove} from './components/card.js';
 import {openPopup, closePopup} from './components/modal.js';
 import {validationConfig} from './components/constants.js';
 import {enableValidation, clearValidation} from './components/validation.js';
-import {config, createNewCard, updateAvatar, updateProfile, deleteCard, likeCard, dislikeCard, getUsers, getCards} from './components/api.js'
+import {config, createNewCard, updateAvatar, updateProfile, deleteCard, likeCard, dislikeCard, getUser, getCards} from './components/api.js'
 
 const content = document.querySelector('.content');
 const profileAvatar = content.querySelector('.profile__image');
@@ -75,7 +75,6 @@ formNewCard.addEventListener('submit', function (evt) {
   const buttonElement = formNewCard.querySelector(submitButtonSelector);
   renderLoading(true, buttonElement);
   createNewCard(formNewCard.elements['place-name'].value, formNewCard.elements.link.value)
-  .then(handleResponse)
   .then((data) => {placesList.prepend(createCard(data, profileId));})
   .catch((err) => {console.log(err);})
   .finally(() => {renderLoading(false, buttonElement);});
@@ -87,7 +86,6 @@ formNewCard.addEventListener('submit', function (evt) {
 formDelete.addEventListener('submit', function (evt) {
   evt.preventDefault();
   deleteCard(cardIdForDelete)
-  .then(handleResponse)
   .then(() => {cardForRemove.remove();})
   .catch((err) => {console.log(err);});
   closePopup(popupDelete);
@@ -100,7 +98,6 @@ formNewAvatar.addEventListener('submit', function (evt) {
   const buttonElement = formNewAvatar.querySelector(submitButtonSelector);
   renderLoading(true, buttonElement);
   updateAvatar(newAvatarLink.value)
-  .then(handleResponse)
   .then((data) => {profileAvatar.style.backgroundImage = `url(${data.avatar})`;})
   .catch((err) => {console.log(err);})
   .finally(() => {renderLoading(false, buttonElement);
@@ -116,7 +113,6 @@ formEditProfile.addEventListener('submit', function (evt) {
   const buttonElement = formEditProfile.querySelector(submitButtonSelector);
   renderLoading(true, buttonElement);
   updateProfile(nameProfile.value, descriptionProfile.value)
-  .then(handleResponse)
   .then((data) => {
     profileTitle.textContent = data.name;
     profileDescription.textContent = data.about;
@@ -131,7 +127,7 @@ formEditProfile.addEventListener('submit', function (evt) {
 enableValidation(validationConfig)
 
 //Добавление пользователя и карточек при запуске
-Promise.all([getUsers(), getCards()])
+Promise.all([getUser(), getCards()])
   .then(([userData, cards]) => {
     profileTitle.textContent = userData.name;
     profileDescription.textContent = userData.about;

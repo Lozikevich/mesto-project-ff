@@ -6,12 +6,6 @@ const popupDelete = document.querySelector('.popup_type_delete');
 let cardIdForDelete;
 let cardForRemove;
 
-//Проверка response
-function handleResponse(data) {
-  if (data.ok) {return data.json();}
-  return Promise.reject(`Ошибка: ${res.status}`);
-};
-
 //Функция создания карточки
 function createCard(card, profileID) {
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
@@ -32,7 +26,6 @@ function createCard(card, profileID) {
   cardLikeButton.addEventListener('click', function() {
     if (cardLikeButton.classList.contains('card__like-button_is-active')) {
       dislikeCard(card._id)
-      .then(handleResponse)
       .then((card) => {
         cardLikeCounter.textContent = card.likes.length;
         cardLikeButton.classList.remove('card__like-button_is-active');
@@ -41,7 +34,6 @@ function createCard(card, profileID) {
     }
     else {
       likeCard(card._id)
-      .then(handleResponse)
       .then((card) => {
         cardLikeCounter.textContent = card.likes.length;
         cardLikeButton.classList.add('card__like-button_is-active');
@@ -68,4 +60,4 @@ function createCard(card, profileID) {
   return cardElement;
 };
 
-export {createCard, popupDelete, cardIdForDelete, cardForRemove, handleResponse};
+export {createCard, popupDelete, cardIdForDelete, cardForRemove};

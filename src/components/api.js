@@ -6,6 +6,11 @@ const config = {
     }
   };
 
+function handleResponse(data) {
+  if (data.ok) {return data.json();}
+  return Promise.reject(`Ошибка: ${res.status}`);
+};
+
 const createNewCard = (name, link) => {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
@@ -15,6 +20,7 @@ const createNewCard = (name, link) => {
       link: link
     })
   })
+  .then(handleResponse)
 };
 
 function deleteCard(cardID) {
@@ -32,6 +38,7 @@ const updateAvatar = (link) => {
       avatar: link
     })
   })
+  .then(handleResponse)
 };
   
 const updateProfile = (name, description) => {
@@ -43,6 +50,7 @@ const updateProfile = (name, description) => {
       about: description
     })
   })
+  .then(handleResponse)
 };
 
 function likeCard(cardID) {
@@ -50,6 +58,7 @@ function likeCard(cardID) {
     method: 'PUT',
     headers: config.headers
   })
+  .then(handleResponse)
 };
 
 function dislikeCard(cardID) {
@@ -57,16 +66,17 @@ function dislikeCard(cardID) {
     method: 'DELETE',
     headers: config.headers
   })
+  .then(handleResponse)
 };
 
-function getUsers() {
+function getUser() {
   return fetch(`${config.baseUrl}/users/me` , {headers: {authorization: config.headers.authorization}})
-    .then((res)=>res.json());
+  .then(handleResponse)
 };
 
 function getCards() {
   return fetch(`${config.baseUrl}/cards` , {headers: {authorization: config.headers.authorization}})
-    .then((res)=>res.json());
+  .then(handleResponse)
 };
 
-export {config, createNewCard, updateAvatar, updateProfile, deleteCard, likeCard, dislikeCard, getUsers, getCards}
+export {config, createNewCard, updateAvatar, updateProfile, deleteCard, likeCard, dislikeCard, getUser, getCards}
